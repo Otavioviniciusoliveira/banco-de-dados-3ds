@@ -1,8 +1,6 @@
-
-
--- Criação da tabela Clientes--
+-- Criação da tabela Clientes
 CREATE TABLE Clientes (
-    ID INT PRIMARY KEY,s
+    ID INT PRIMARY KEY,
     nomeCliente VARCHAR(255),
     emailCliente VARCHAR(255)
 );
@@ -14,3 +12,21 @@ CREATE TABLE Compras (
     NomeLivro VARCHAR(255),
     FOREIGN KEY (ClienteID) REFERENCES Clientes(ID)
 );
+
+-- Inserção de dados na tabela Clientes
+INSERT INTO Clientes (ID, nomeCliente, emailCliente) 
+VALUES 
+(1, 'Ana Silva', 'ana.silva@email.com'),
+(2, 'Carlos Souza', 'carlos.souza@email.com'),
+(3, 'Beatriz Oliveira', 'beatriz.oliveira@email.com');
+
+-- Inserção de dados na tabela Compras
+INSERT INTO Compras (CompraID, ClienteID, NomeLivro) 
+VALUES 
+(1, 1, 'Dom Quixote'),
+(2, 2, 'O Pequeno Príncipe'),
+(3, 1, '1984'),
+(4, 3, 'Orgulho e Preconceito'),
+(5, 2, 'A Arte da Guerra');
+
+SELECT * FROM Clientes;
