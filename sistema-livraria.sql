@@ -29,4 +29,16 @@ VALUES
 (4, 3, 'Orgulho e Preconceito'),
 (5, 2, 'A Arte da Guerra');
 
+
+
+-- Consulta com INNER JOIN
+SELECT 
+    Clientes.nomeCliente, 
+    Compras.NomeLivro
+FROM 
+    Compras
+INNER JOIN 
+    Clientes
+ON 
+    Compras.ClienteID = Clientes.ID;
 SELECT * FROM Clientes;
