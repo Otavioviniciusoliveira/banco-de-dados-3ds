@@ -42,6 +42,13 @@ produtos = [
 produtos.append(Produto(4, "Lápis", "Papelaria", 150, 1.50, "Faber-Castell"))
 produtos.append(Produto(5, "Apontador", "Papelaria", 80, 3.00, "Staedtler"))
 
+# 📋 Função para listar produtos com preço acima de R$10
+def listar_produtos_acima_de_10():
+    print("\n💰 Produtos com preço acima de R$10:")
+    for produto in produtos:
+        if produto.preco > 10:
+            print(produto)
+
 # 🧬 Serializa os produtos para JSON e exibe no terminal
 json_produtos = json.dumps([p.to_dict() for p in produtos], indent=4)
 print("📦 Produtos em JSON:")
@@ -89,3 +96,6 @@ for row in cursor.fetchall():
 
 # 🔒 Encerra a conexão com o banco
 conn.close()
+
+# ✅ Teste da função listar_produtos_acima_de_10()
+listar_produtos_acima_de_10()
