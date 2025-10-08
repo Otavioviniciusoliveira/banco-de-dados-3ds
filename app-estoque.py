@@ -38,6 +38,10 @@ produtos = [
     Produto(3, "Borracha", "Papelaria", 200, 1.20, "Mercur")
 ]
 
+# 🆕 Adiciona novos produtos à lista usando .append()
+produtos.append(Produto(4, "Lápis", "Papelaria", 150, 1.50, "Faber-Castell"))
+produtos.append(Produto(5, "Apontador", "Papelaria", 80, 3.00, "Staedtler"))
+
 # 🧬 Serializa os produtos para JSON e exibe no terminal
 json_produtos = json.dumps([p.to_dict() for p in produtos], indent=4)
 print("📦 Produtos em JSON:")
