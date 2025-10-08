@@ -49,6 +49,14 @@ def listar_produtos_acima_de_10():
         if produto.preco > 10:
             print(produto)
 
+# 📋 Função para alterar o preço de um produto pelo nome
+def alterar_preco(nome_produto, novo_preco):
+    for produto in produtos:
+        if produto.nome == nome_produto:
+            produto.preco = novo_preco
+            return f"Preço do produto '{nome_produto}' atualizado para R${novo_preco:.2f}."
+    return f"Produto '{nome_produto}' não encontrado na lista."
+
 # 🧬 Serializa os produtos para JSON e exibe no terminal
 json_produtos = json.dumps([p.to_dict() for p in produtos], indent=4)
 print("📦 Produtos em JSON:")
@@ -97,5 +105,6 @@ for row in cursor.fetchall():
 # 🔒 Encerra a conexão com o banco
 conn.close()
 
-# ✅ Teste da função listar_produtos_acima_de_10()
+# ✅ Teste das funções
 listar_produtos_acima_de_10()
+print(alterar_preco("Caneta", 3.00))
