@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Manager</title>
+    <style>
+        :root {
+            --bg-light: #f0f4ff;
+            --bg-dark: #1e1e2f;
+            --container-light: #ffffff;
+            --container-dark: #2c2c3e;
+            --text-light: #333;
+            --text-dark: #f0f0f0;
+            --accent: #00b4d8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: var(--container-light);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode .container {
+            background-color: var(--container-dark);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: var(--accent);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background-color: #f1faff;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-left: 5px solid var(--accent);
+            border-radius: 6px;
+        }
+
+        .dark-mode li {
+            background-color: #3a3a4d;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 120px;
+            border-radius: 50%;
+        }
+
+        .theme-toggle {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .theme-toggle button {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <!-- Substitua pelo seu logotipo -->
+            <img src="https://i.postimg.cc/gjj2DzKK/logo-app-verde.png" alt="Logo do Projeto">
+        </div>
+
+        <h1>Gerenciamento de Produtos</h1>
+        <form method="POST">
+            <label for="nome">Nome do Produto:</label>
+            <input type="text" name="nome" id="nome">
+
+            <label for="preco">Preço:</label>
+            <input type="text" name="preco" id="preco">
+
+            <button type="submit">Inserir Produto</button>
+            <label for="fornecedor">Fornecedor:</label>
+
+            <input type="text" name="fornecedor" id="fornecedor">
+        </form>
+
+        <h2>Lista de Produtos</h2>
+        <ul>
+            {% for produto in produtos %}
+                <li>
+                    {{ produto['id'] }} - {{ produto['nome'] }}: R$ {{ "%.2f"|format(produto['preco']) }}  
+                    <br><strong>Fornecedor:</strong> {{ produto['fornecedor'] }}
+                </li>
+            {% endfor %}
+        </ul>
+
+
+        <div class="theme-toggle">
+            <button onclick="toggleTheme()">Trocar de Tema</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>
