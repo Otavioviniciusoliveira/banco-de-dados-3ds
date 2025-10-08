@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciador de Produtos</title>
+
+    <!-- Fonte moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-light: #fdfcf5;
+            --bg-dark: #2e3b2f;
+            --container-light: #ffffff;
+            --container-dark: #3f4f3f;
+            --text-light: #2c3e50;
+            --text-dark: #e0e0d6;
+            --accent: #4caf50;
+            --danger: #e53935;
+            --warning: #fbc02d;
+            --font-main: 'Poppins', sans-serif;
+        }
+
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease;
+            color: var(--text-light);
+        }
+
+        .dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 60px auto;
+            background-color: var(--container-light);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode .container {
+            background-color: var(--container-dark);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        button {
+            margin-top: 24px;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        form button.danger {
+            background-color: var(--danger);
+        }
+
+        form button.warning {
+            background-color: var(--warning);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background-color: #e3f7ff;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 5px solid var(--accent);
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .dark-mode li {
+            background-color: #3a3a4d;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            max-width: 120px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .theme-toggle {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .theme-toggle button {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://explend.com.br/wp-content/uploads/2021/07/estoque.png" alt="Logo do Projeto">
+        </div>
+
+        <h1>Gerenciador de Produtos</h1>
+        <form method="POST">
+            <label for="nome">Nome do Produto:</label>
+            <input type="text" name="nome" id="nome">
+
+            <label for="preco">Preço:</label>
+            <input type="text" name="preco" id="preco">
+
+            <label for="fornecedor">Fornecedor:</label>
+            <input type="text" name="fornecedor" id="fornecedor">
+
+            <button type="submit">➕ Inserir Produto</button>
+        </form>
+
+        <h2>Lista Produtos</h2>
+        <ul>
+            {% for produto in produtos %}
+                <li>
+                    {{ produto['id'] }} - {{ produto['nome'] }}: R$ {{ "%.2f"|format(produto['preco']) }}  
+                    <br><strong>Fornecedor:</strong> {{ produto['fornecedor'] }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <form method="POST" action="/limpar">
+            <button type="submit" class="danger">🗑️ Limpar Lista</button>
+        </form>
+
+        <form method="POST" action="/excluir">
+            <label for="id">Excluir Produto por ID:</label>
+            <input type="text" name="id" id="id" placeholder="Digite o ID do produto">
+            <button type="submit" class="warning">🆔 Excluir por ID</button>
+        </form>
+
+        <div class="theme-toggle">
+            <button onclick="toggleTheme()">🌗 Mudar Tema</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>
+
